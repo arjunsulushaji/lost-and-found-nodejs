@@ -1,0 +1,45 @@
+<section>
+    <div class="container-fluid pt-5">
+        <h3 class="text-center pt-5">RECENT LOST THINGS POST</h3>
+        <div class="card-deck pt-3">
+            {{#each items}}
+            <div class="cards col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pb-4">
+                <div class="card border-primary">
+                    <img class="card-img-top" src="/images/aadhaar.webp" alt="Card image cap">
+                    <div class="card-body text-primary" style="height: 7rem;">
+                        <h5 class="card-title">AADHAR CARD</h5>
+                        <h6 class="card-text">xxxx xxxx {{this.lastDigit}}</h6>
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                        {{!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p> --}}
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="" type="button" class="btn btn-primary btn-sm ">Show details</a>
+                    </div>
+                </div>
+            </div> 
+            {{/each}}
+        </div>
+
+        <h3 class="text-center pt-3">RECENT FOUND THINGS POST</h3>
+        <div class="card-deck pt-3">
+            {{#each itemss}}
+            <div class="cards col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pb-4">
+                <div class="card border-primary">
+                    <img class="card-img-top" src="/images/aadhaar.webp" alt="Card image cap">
+                    <div class="card-body text-primary" style="height: 7rem;">
+                        <h5 class="card-title">AADHAR CARD</h5>
+                        <h6 class="card-text">xxxx xxxx {{this.lastDigit}}</h6>
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                        {{!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p> --}}
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="" type="button" class="btn btn-primary btn-sm ">Show details</a>
+                    </div>
+                </div>
+            </div> 
+            {{/each}}
+        </div>
+    </div>
+</section>
