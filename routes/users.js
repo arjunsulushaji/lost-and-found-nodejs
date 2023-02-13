@@ -44,19 +44,26 @@ router.get('/', function (req, res, next) {
       lastDigit: 1245
     }
   ]
-  res.render('user/index', { items,itemss });
+  res.render('user/index', { items, itemss });
 });
 
 //signup router setup
-router.get('/signup',(req,res)=>{
+router.get('/signup', (req, res) => {
   res.render('user/signup')
 })
 
-router.post('/signup',async(req,res)=>{
+router.post('/signup', async (req, res) => {
   // console.log(req.body);
-  await userHelper.doSignup(req.body).then((response)=>{
-    res.redirect('/')
-  })
+  let alert = 'user already exists !'
+  let user = await userHelper.getUser(req.body)
+  if (user.length > 0) {
+    res.render('user/signup', { alert })
+    alert = null
+  } else {
+    await userHelper.doSignup(req.body).then((response) => {
+      res.redirect('/')
+    })
+  }
 })
 
 module.exports = router;
