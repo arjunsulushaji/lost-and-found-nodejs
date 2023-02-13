@@ -1,0 +1,54 @@
+<section>
+    <div class="container pt-5">
+        <h3 class="pt-5 text-center">User Signup</h3>
+        <form action="/signup" method="post">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input type="text" class="form-control" id="" placeholder="Enter name" name="userName" required="">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter email" name="userEmail" required="">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                    name="userPass" required="">
+            </div>
+            <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                    <label class="mr-sm-2" for="inlineFormCustomSelect">District</label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="userDistrict" required="">
+                        <option selected>Choose...</option>
+                        <option value=asargod">Kasargod</option>
+                        <option value="Ka" Knnur">Kannur</option>
+                        <option value="Wayanad">Wayanad</option>
+                        <option value="Kozhikode">Kozhikode</option>
+                        <option value="Malapuram">Malapuram</option>
+                        <option value="Palakkad">Palakkad</option>
+                        <option value="Thrissur">Thrissur</option>
+                        <option value="Ernakulam">Ernakulam</option>
+                        <option value="Idukki">Idukki</option>
+                        <option value="Kottayam">Kottayam</option>
+                        <option value="Alappuzha">Alappuzha</option>
+                        <option value="Pathanamthitta">Pathanamthitta</option>
+                        <option value="Kollam">Kollam</option>
+                        <option value="Thiruvanthapuram">Thiruvanthapuram</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Phone number</label>
+                <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Phone number"
+                    name="userPhno" required="">
+                <div class="invalid-tooltip">
+                    Please provide a valid phone number.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-primary btn-block">Submit</button>
+        </form>
+    </div>
+</section>
