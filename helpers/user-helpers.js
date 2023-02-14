@@ -24,5 +24,27 @@ module.exports = {
                 resolve(respone)
             })
         })
+    },
+    doLogin: (userData) => {
+        return new Promise(async(resolve, reject) => {
+            let respone = {}
+            let user = await db.get().collection(collection.USER_COLLECTION).findOne({ userEmail: userData.email })
+            if (user) {
+                bcrypt.compare(userData.password, user.userPass).then((status) => {
+                    if (status) {
+                        console.log('login success......');
+                        respone.user = user
+                        respone.status = true
+                        resolve(respone)
+                    } else {
+                        console.log('password incorrect.....');
+                        resolve({ passwordStatus: true })
+                    }
+                })
+            } else {
+                console.log('user email dosent match');
+                resolve({ emailStatus: true })
+            }
+        })
     }
 }

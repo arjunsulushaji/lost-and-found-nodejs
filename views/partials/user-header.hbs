@@ -1,8 +1,8 @@
 <section>
-    <div class="" >
+    <div class="">
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             {{!-- <a class="navbar-brand mb-0 h1" href="#">Navbar</a> --}}
-            <a class="navbar-brand mr-5" href="#">
+            <a class="navbar-brand mr-5" href="/">
                 <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top mr-2" alt="">
                 Lost & Found
             </a>
@@ -33,11 +33,19 @@
                 <div class="dropdown mr-4">
                     <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{#if user}}
+                        {{user.userName}}
+                        {{else}}
                         Account
+                        {{/if}}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a href="" class="dropdown-item" type="button">Login</a>
+                        {{#if user}}
+                        <a href="/logout" class="dropdown-item" type="button">Logout</a>
+                        {{else}}
+                        <a href="/login" class="dropdown-item" type="button">Login</a>
                         <a href="/signup" class="dropdown-item" type="button">Signup</a>
+                        {{/if}}
                     </div>
                 </div>
             </div>
