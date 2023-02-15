@@ -4,7 +4,7 @@ var userHelper = require('../helpers/user-helpers')
 var postHelper = require('../helpers/post-helpers')
 
 
-const verifyLogin = (req, res,next) => {
+const verifyLogin = (req, res, next) => {
   if (req.session.user) {
     next()
   } else {
@@ -13,12 +13,13 @@ const verifyLogin = (req, res,next) => {
 }
 
 /* GET home page. */
-router.get('/',async function (req, res, next) {                        //get home page
+router.get('/', async function (req, res, next) {                        //get home page
   let user = req.session.user
   let userSuccess = req.session.userSuccess
-  await postHelper.getLostThings().then((lostThings)=>{
-    console.log(lostThings);
-    res.render('user/index', {lostThings, user, userSuccess });
+  await postHelper.getLostThings().then(async(lostThings) => {
+    await postHelper.getFoundThings().then((foundThings) => {
+      res.render('user/index', { lostThings,foundThings, user, userSuccess });
+    })
   })
   // req.session.userSuccess = null
 });
@@ -58,7 +59,7 @@ router.get('/login', (req, res) => {                               //get user lo
 
 router.post('/login', (req, res) => {                              //validate login and redirect to home
   userHelper.doLogin(req.body).then((response) => {
-    console.log(response);
+    // console.log(response);
     if (response.status) {
       req.session.userLogin = true
       req.session.userSuccess = true
@@ -79,13 +80,23 @@ router.get('/logout', (req, res) => {                               //get user l
   res.redirect('/')
 })
 
-router.get('/add-lost-things',verifyLogin,(req,res)=>{              //get lost thing post upload page
+router.get('/add-lost-things', verifyLogin, (req, res) => {              //get lost thing post upload page
   res.render('user/add-lost-things')
 })
 
-router.post('/add-lost-things',verifyLogin,(req,res)=>{             //add post of lost things
+router.post('/add-lost-things', verifyLogin, (req, res) => {             //add post of lost things
   // console.log(req.body);
-  postHelper.addFoundThings(req.body,req.session.user).then(()=>{
+  postHelper.addLostThings(req.body, req.session.user).then(() => {
+    res.redirect('/')
+  })
+})
+
+router.get('/add-found-things', verifyLogin, (req, res) => {
+  res.render('user/add-found-things')
+})
+
+router.post('/add-found-things', verifyLogin, (req, res) => {
+  postHelper.addFoundThings(req.body, req.session.user).then(() => {
     res.redirect('/')
   })
 })

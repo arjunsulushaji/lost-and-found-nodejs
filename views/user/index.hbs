@@ -7,52 +7,48 @@
 
 <section>
     <div class="container-fluid pt-5">
-        <h3 class="text-center pt-5">RECENT LOST THINGS POST</h3>
+        <h5 class="text-center pt-5">RECENT LOST THINGS</h5>
         <div class="card-deck pt-3">
             {{#each lostThings}}
             <div class="cards col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pb-4">
                 <div class="card border-primary">
-                    <img class="img card-img-top" src="/images/{{this.category}}.webp" alt="Card image cap">
+                    <img class="img card-img-top" src="/images/{{this.category}}.jpg" alt="Card image cap">
                     <div class="card-body" style="height: 7rem;">
                         <h6 class="card-title">{{this.category}}</h6>
                         <h6 class="card-text">xxxx xxxx <span class="text-primary">{{this.cardNo}}</span></h6>
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                        {{!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        <small class="text-muted">Posted on : {{this.date}}</small>
+                        {{!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in
+                            to
                             additional content. This content is a little bit longer.</p> --}}
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="card-footer text-center border-primary">
                         <a href="" type="button" class="btn btn-primary btn-sm ">Show details</a>
                     </div>
                 </div>
-            </div> 
+            </div>
             {{/each}}
         </div>
 
-        <h3 class="text-center pt-3">RECENT FOUND THINGS POST</h3>
+        <h5 class="text-center pt-5">RECENT FOUND THINGS</h5>
         <div class="card-deck pt-3">
-            
+            {{#each foundThings}}
             <div class="cards col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pb-4">
                 <div class="card border-primary">
-                    <img class="card-img-top" src="/images/aadhaar.webp" alt="Card image cap">
-                    <div class="card-body text-primary" style="height: 7rem;">
-                        <h6 class="card-title">AADHAR CARD</h6>
-                        <h6 class="card-text">xxxx xxxx </h6>
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                        {{!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    <img class="img card-img-top" src="/images/{{this.category}}.jpg" alt="Card image cap">
+                    <div class="card-body" style="height: 7rem;">
+                        <h6 class="card-title">{{this.category}}</h6>
+                        <h6 class="card-text">xxxx xxxx <span class="text-primary">{{this.cardNo}}</span></h6>
+                        <small class="text-muted">Posted on : {{this.date}}</small>
+                        {{!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in
+                            to
                             additional content. This content is a little bit longer.</p> --}}
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="card-footer text-center border-primary">
                         <a href="" type="button" class="btn btn-primary btn-sm ">Show details</a>
                     </div>
                 </div>
-            </div> 
+            </div>
+            {{/each}}
         </div>
     </div>
 </section>
-
-<style>
-    .img{
-        width: 12rem;
-        height: 8rem;
-    }
-</style>
