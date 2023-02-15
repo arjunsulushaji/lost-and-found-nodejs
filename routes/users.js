@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var userHelper = require('../helpers/user-helpers')
+var postHelper = require('../helpers/post-helpers')
 
 
-const verifyLogin = (req, res) => {
+const verifyLogin = (req, res,next) => {
   if (req.session.user) {
     next()
   } else {
@@ -12,20 +13,13 @@ const verifyLogin = (req, res) => {
 }
 
 /* GET home page. */
-router.get('/', function (req, res, next) {                        //get home page
+router.get('/',async function (req, res, next) {                        //get home page
   let user = req.session.user
   let userSuccess = req.session.userSuccess
-  let items = [
-    {
-      lastDigit: 4444
-    }
-  ]
-  let itemss = [
-    {
-      lastDigit: 4444
-    }
-  ]
-  res.render('user/index', { items, itemss, user, userSuccess });
+  await postHelper.getLostThings().then((lostThings)=>{
+    console.log(lostThings);
+    res.render('user/index', {lostThings, user, userSuccess });
+  })
   // req.session.userSuccess = null
 });
 
@@ -85,5 +79,15 @@ router.get('/logout', (req, res) => {                               //get user l
   res.redirect('/')
 })
 
+router.get('/add-lost-things',verifyLogin,(req,res)=>{              //get lost thing post upload page
+  res.render('user/add-lost-things')
+})
+
+router.post('/add-lost-things',verifyLogin,(req,res)=>{             //add post of lost things
+  // console.log(req.body);
+  postHelper.addFoundThings(req.body,req.session.user).then(()=>{
+    res.redirect('/')
+  })
+})
 
 module.exports = router;
