@@ -15,10 +15,9 @@ const verifyLogin = (req, res, next) => {
 /* GET home page. */
 router.get('/', async function (req, res, next) {                        //get home page
   let user = req.session.user
-  let userSuccess = req.session.userSuccess
-  await postHelper.getLostThings().then(async(lostThings) => {
+  await postHelper.getLostThings().then(async (lostThings) => {
     await postHelper.getFoundThings().then((foundThings) => {
-      res.render('user/index', { lostThings,foundThings, user, userSuccess });
+      res.render('user/index', { lostThings, foundThings, user });
     })
   })
   // req.session.userSuccess = null
@@ -39,7 +38,6 @@ router.post('/signup', async (req, res) => {                      //store signup
   } else {
     await userHelper.doSignup(req.body).then((response) => {
       req.session.userLogin = true
-      req.session.userSuccess = true
       req.session.user = response.user
       // console.log(req.session.user);
       res.redirect('/')
@@ -91,14 +89,21 @@ router.post('/add-lost-things', verifyLogin, (req, res) => {             //add p
   })
 })
 
-router.get('/add-found-things', verifyLogin, (req, res) => {
+router.get('/add-found-things', verifyLogin, (req, res) => {              //get form for found things
   res.render('user/add-found-things')
 })
 
-router.post('/add-found-things', verifyLogin, (req, res) => {
+router.post('/add-found-things', verifyLogin, (req, res) => {            //add post for found things
   postHelper.addFoundThings(req.body, req.session.user).then(() => {
     res.redirect('/')
   })
+})
+
+router.get('/details', async(req, res) => {
+  // console.log(req.query.id);
+  let details = await postHelper.getPostDetails(req.query.id)
+  // console.log(details);
+    res.render('user/show-details',{details})
 })
 
 module.exports = router;
