@@ -91,10 +91,18 @@ module.exports = {
     },
 
     deleteLostPost: (postId) => {
-            return new Promise((resolve,reject)=>{
-                db.get().collection(collection.LOST_THINGS).remove({_id:ObjectId(postId)}).then(()=>{
-                    resolve(true)
-                })
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.LOST_THINGS).remove({ _id: ObjectId(postId) }).then(() => {
+                resolve(true)
             })
+        })
+    },
+
+    deleteFoundPost: (postId) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.FOUND_THINGS).remove({ _id: ObjectId(postId) }).then(() => {
+                resolve(true)
+            })
+        })
     }
 }

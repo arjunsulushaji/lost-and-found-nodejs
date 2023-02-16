@@ -9,7 +9,7 @@
                     <th scope="col">Card No</th>
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
-                     <th scope="col">Edit</th>
+                    <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -22,10 +22,25 @@
                     <td>{{this.date}}</td>
                     <td>{{this.time}}</td>
                     <td><a href="" class="btn btn-primary">Edit</a></td>
-                    <td><a href="" class="btn btn-danger" onclick="return confirm('Are you sure want to delete !!')">Delete</a></td>
+                    <td><button href="" class="btn btn-danger" onclick="deletePost('{{this._id}}')">Delete</button></td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
     </div>
 </section>
+
+<script>
+    deletePost = (postId) => {
+        if (confirm('are you sure you want to delete') == true) {
+            $.ajax({
+                url: '/delete-found-post' + postId,
+                type: 'POST',
+                success: (response) => {
+                    alert('Post deleted successfully !!')
+                    location.reload()
+                }
+            })
+        }
+    }
+</script>

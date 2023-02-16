@@ -32,7 +32,7 @@
 
 <script>
     deletePost = (postId) => {
-        if (confirm('are you sure you want to delete post') == true) {
+        if (confirm('are you sure you want to delete') == true) {
             $.ajax({
                 url: '/delete-post' + postId,
                 type: 'POST',

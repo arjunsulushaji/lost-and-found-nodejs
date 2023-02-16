@@ -133,4 +133,12 @@ router.post('/delete-post:id',async(req,res)=>{
   })
 })
 
+router.post('/delete-found-post:id',async(req,res)=>{
+  // console.log(req.params.id);
+  await postHelper.deleteFoundPost(req.params.id).then((response)=>{
+    res.json(response)
+  })
+})
+
+
 module.exports = router;
