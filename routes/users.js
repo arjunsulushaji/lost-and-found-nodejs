@@ -124,7 +124,13 @@ router.get('/found-things-post', verifyLogin, async (req, res) => {
   } else {
     res.redirect('/')
   }
+})
 
+router.post('/delete-post:id',async(req,res)=>{
+  // console.log(req.params.id);
+  await postHelper.deleteLostPost(req.params.id).then((response)=>{
+    res.json(response)
+  })
 })
 
 module.exports = router;

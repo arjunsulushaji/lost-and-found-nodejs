@@ -75,18 +75,26 @@ module.exports = {
         })
     },
 
-    getLostThing:(user)=>{
-        console.log(user);
-        return new Promise(async(resolve,reject)=>{
-            let lostThings = await db.get().collection(collection.LOST_THINGS).find({"user._id":user._id}).toArray()
+    getLostThing: (user) => {
+        // console.log(user);
+        return new Promise(async (resolve, reject) => {
+            let lostThings = await db.get().collection(collection.LOST_THINGS).find({ "user._id": user._id }).toArray()
             resolve(lostThings)
         })
     },
 
-    getFoundThing:(user)=>{
-        return new Promise(async(resolve,reject)=>{
-            let foundThings = await db.get().collection(collection.FOUND_THINGS).find({"user._id":user._id}).toArray()
+    getFoundThing: (user) => {
+        return new Promise(async (resolve, reject) => {
+            let foundThings = await db.get().collection(collection.FOUND_THINGS).find({ "user._id": user._id }).toArray()
             resolve(foundThings)
         })
+    },
+
+    deleteLostPost: (postId) => {
+            return new Promise((resolve,reject)=>{
+                db.get().collection(collection.LOST_THINGS).remove({_id:ObjectId(postId)}).then(()=>{
+                    resolve(true)
+                })
+            })
     }
 }
