@@ -1,0 +1,31 @@
+<section>
+    <div class="container pt-5">
+        <h5 class="text-center pt-5">LOST THINGS</h5>
+        <table class="table mt-3 table-primary">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Holder Name</th>
+                    <th scope="col">Card No</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                     <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each lostThings}}
+                <tr>
+                    <td scope="row">{{this.category}}</td>
+                    <td>{{this.holderName}}</td>
+                    <td>{{this.cardNo}}</td>
+                    <td>{{this.date}}</td>
+                    <td>{{this.time}}</td>
+                    <td><a href="" class="btn btn-primary">Edit</a></td>
+                    <td><a href="" class="btn btn-danger" onclick="return confirm('Are you sure want to delete !!')">Delete</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>

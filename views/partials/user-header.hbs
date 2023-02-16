@@ -14,17 +14,30 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link mr-2" href="/notification">Notification <span class="sr-only">(current)</span></a>
+                        <a class="nav-link mr-2" href="/notification">Notification <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link mr-2" href="/add-lost-things">Add lost things <span class="sr-only">(current)</span></a>
+                        <a class="nav-link mr-2" href="/add-lost-things">Add lost things <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link mr-2" href="/add-found-things">Add found things <span class="sr-only">(current)</span></a>
+                        <a class="nav-link mr-2" href="/add-found-things">Add found things <span
+                                class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link mr-2" href="/">Posts<span class="sr-only">(current)</span></a>
-                    </li>
+                    <div class="btn-group dropright">
+                        <button type="button" class="btn btn-primary">
+                            Posts
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Posts</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="/lost-things-post" class="dropdown-item" type="button">lost-things-post</a>
+                            <a href="/found-things-post" class="dropdown-item" type="button">found-things-post</a>
+                        </div>
+                    </div>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search">

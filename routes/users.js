@@ -99,11 +99,32 @@ router.post('/add-found-things', verifyLogin, (req, res) => {            //add p
   })
 })
 
-router.get('/details', async(req, res) => {
+router.get('/details', async (req, res) => {                               //get details of lost items
   // console.log(req.query.id);
   let details = await postHelper.getPostDetails(req.query.id)
   // console.log(details);
-    res.render('user/show-details',{details})
+  res.render('user/show-details', { details })
+})
+
+router.get('/lost-things-post', verifyLogin, async (req, res) => {
+  let lostThings = await postHelper.getLostThing(req.session.user)
+  // console.log(lostThings);
+  if (lostThings.length > 0) {
+    res.render('user/show-posts1', { lostThings })
+  } else {
+    res.redirect('/')
+  }
+})
+
+router.get('/found-things-post', verifyLogin, async (req, res) => {
+  let foundThings = await postHelper.getFoundThing(req.session.user)
+  // console.log(lostThings);
+  if (foundThings.length > 0) {
+    res.render('user/show-posts2', { foundThings })
+  } else {
+    res.redirect('/')
+  }
+
 })
 
 module.exports = router;

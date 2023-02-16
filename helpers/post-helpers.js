@@ -73,5 +73,20 @@ module.exports = {
             let details = await db.get().collection(collection.LOST_THINGS).find({ _id: ObjectId(postId) }).toArray()
             resolve(details)
         })
+    },
+
+    getLostThing:(user)=>{
+        console.log(user);
+        return new Promise(async(resolve,reject)=>{
+            let lostThings = await db.get().collection(collection.LOST_THINGS).find({"user._id":user._id}).toArray()
+            resolve(lostThings)
+        })
+    },
+
+    getFoundThing:(user)=>{
+        return new Promise(async(resolve,reject)=>{
+            let foundThings = await db.get().collection(collection.FOUND_THINGS).find({"user._id":user._id}).toArray()
+            resolve(foundThings)
+        })
     }
 }
