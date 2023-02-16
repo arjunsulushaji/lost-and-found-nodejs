@@ -1,23 +1,13 @@
 <section>
     <div class="container pt-5">
-        <table class="table table-primary mt-5">
-            {{#each details}}
-            <tbody>
-                <tr>
-                    <th scope="row">Description</th>
-                    <td style="word-break: break-all; overflow: hidden;">{{this.description}}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Posted by</th>
-                    <td>{{this.user.name}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Contact</th>
-                    <td>{{this.user.phno}}</td>
-                </tr>
-            </tbody>
-            {{/each}}
-        </table>
+        {{#each details}}
+        <div class="alert alert-primary mt-5" role="alert">
+            <h4 class="alert-heading">Description !</h4>
+            <p>{{this.description}}</p>
+            <hr>
+            <p class="mb-0">Contact : {{this.user.phno}}</p>
+            <p class="mb-0 text-right">By : {{this.user.name}}</p>
+        </div>
+        {{/each}}
     </div>
 </section>
