@@ -23,7 +23,7 @@
                 <input type="number" class="form-control" id="digit" aria-describedby="emailHelp"
                     placeholder="Enter last 4 digit" name="cardNo" required="">
             </div>
-            <h6 id="error" class="text-danger" style="display: none;">Please enter 4 digit</h6>
+            <h6 id="error" class="text-danger" style="display: none;">Please enter 4 digit only !</h6>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Description</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
@@ -40,7 +40,7 @@
     $(document).ready(() => {
         $("#lost-things").submit(function (e) {
             var digit = $('#digit').val()
-            if (digit.length < 4) {
+            if (digit.length != 4) {
                 $("#error").show()
                 e.preventDefault();
             } else {
