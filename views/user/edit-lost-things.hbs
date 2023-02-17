@@ -1,0 +1,57 @@
+<section>
+    <div class="container pt-5">
+        <h3 class="text-center pt-5">Edit Lost Things</h3>
+        <form action="/edit-lost-post" method="post" id="lost-things">
+            <div class="form-group">
+                <input type="text" value="{{post._id}}" class="form-control" id=""
+                    placeholder="Enter card holder name" name="id" hidden="">
+            </div>
+            <div class="form-row align-items-center pb-2">
+                <div class="col-auto my-1">
+                    <label class="mr-sm-2" for="inlineFormCustomSelect">Choose Item</label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="category" required="">
+                        <option selected value="{{post.category}}">Choose...</option>
+                        <option value="AADHAR_CARD">AADHAR CARD</option>
+                        <option value="DRIVING_LICENCE">DRIVING LICENCE</option>
+                        <option value="PAN_CARD">PAN CARD</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input type="text" value="{{post.holderName}}" class="form-control" id=""
+                    placeholder="Enter card holder name" name="holderName" required="">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Enter Digit</label>
+                <input type="number" value="{{post.cardNo}}" class="form-control" id="digit"
+                    aria-describedby="emailHelp" placeholder="Enter last 4 digit" name="cardNo" required="">
+            </div>
+            <h6 id="error" class="text-danger" style="display: none;">Please enter 4 digit</h6>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    name="description">{{post.description}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-primary btn-block">Submit</button>
+        </form>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(() => {
+        $("#lost-things").submit(function (e) {
+            var digit = $('#digit').val()
+            if (digit.length < 4) {
+                $("#error").show()
+                e.preventDefault();
+            } else {
+                $("#error").hide()
+                e.currentTarget.submit();
+            }
+        })
+    })
+</script>

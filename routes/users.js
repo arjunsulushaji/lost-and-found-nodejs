@@ -106,7 +106,7 @@ router.get('/details', async (req, res) => {                               //get
   res.render('user/show-details', { details })
 })
 
-router.get('/lost-things-post', verifyLogin, async (req, res) => {
+router.get('/lost-things-post', verifyLogin, async (req, res) => {        //get lost things post uploaded user
   let lostThings = await postHelper.getLostThing(req.session.user)
   // console.log(lostThings);
   if (lostThings.length > 0) {
@@ -116,7 +116,7 @@ router.get('/lost-things-post', verifyLogin, async (req, res) => {
   }
 })
 
-router.get('/found-things-post', verifyLogin, async (req, res) => {
+router.get('/found-things-post', verifyLogin, async (req, res) => {         //get found things post uploaded user
   let foundThings = await postHelper.getFoundThing(req.session.user)
   // console.log(lostThings);
   if (foundThings.length > 0) {
@@ -126,19 +126,46 @@ router.get('/found-things-post', verifyLogin, async (req, res) => {
   }
 })
 
-router.post('/delete-post:id',async(req,res)=>{
+router.post('/delete-post:id',async(req,res)=>{                             //delete lost thing post 
   // console.log(req.params.id);
   await postHelper.deleteLostPost(req.params.id).then((response)=>{
     res.json(response)
   })
 })
 
-router.post('/delete-found-post:id',async(req,res)=>{
+router.post('/delete-found-post:id',async(req,res)=>{                         //delete found thing post 
   // console.log(req.params.id);
   await postHelper.deleteFoundPost(req.params.id).then((response)=>{
     res.json(response)
   })
 })
+
+router.get('/edit-found-post',async(req,res)=>{                                 //get value to edit found post
+  let post = await postHelper.getFoundPost(req.query.id)
+  // console.log(post);
+  res.render('user/edit-found-things',{post})
+})
+
+router.post('/edit-found-post',(req,res)=>{                                     //edit found post
+  // console.log(req.body);
+  postHelper.editFoundPost(req.body).then(()=>{
+    res.redirect('/found-things-post')
+  })
+})
+
+router.get('/edit-lost-post',async(req,res)=>{                                 //get value to edit lost post
+  let post = await postHelper.getLostPost(req.query.id)
+  // console.log(post);
+  res.render('user/edit-lost-things',{post})
+})
+
+router.post('/edit-lost-post',(req,res)=>{                                     //edit lost post
+  // console.log(req.body);
+  postHelper.editLostPost(req.body).then(()=>{
+    res.redirect('/lost-things-post')
+  })
+})
+
 
 
 module.exports = router;

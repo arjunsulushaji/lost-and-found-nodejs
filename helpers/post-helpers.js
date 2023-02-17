@@ -104,5 +104,51 @@ module.exports = {
                 resolve(true)
             })
         })
+    },
+
+    getFoundPost: (postId) => {
+        return new Promise(async (resolve, reject) => {
+            await db.get().collection(collection.FOUND_THINGS).findOne({ _id: ObjectId(postId) }).then((post) => {
+                resolve(post)
+            })
+        })
+    },
+
+    editFoundPost: (details) => {
+        return new Promise(async (resolve, reject) => {
+            await db.get().collection(collection.FOUND_THINGS).updateOne({ _id: ObjectId(details.id) }, {
+                $set: {
+                    holderName: details.holderName,
+                    category: details.category,
+                    cardNo: details.cardNo,
+                    description: details.description
+                }
+            }).then(()=>{
+                resolve(response)
+            })
+        })
+    },
+
+    getLostPost: (postId) => {
+        return new Promise(async (resolve, reject) => {
+            await db.get().collection(collection.LOST_THINGS).findOne({ _id: ObjectId(postId) }).then((post) => {
+                resolve(post)
+            })
+        })
+    },
+
+    editLostPost: (details) => {
+        return new Promise(async (resolve, reject) => {
+            await db.get().collection(collection.LOST_THINGS).updateOne({ _id: ObjectId(details.id) }, {
+                $set: {
+                    holderName: details.holderName,
+                    category: details.category,
+                    cardNo: details.cardNo,
+                    description: details.description
+                }
+            }).then(()=>{
+                resolve(response)
+            })
+        })
     }
 }
