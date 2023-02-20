@@ -127,4 +127,15 @@ router.post('/edit-found-post', (req, res) => {                                 
   })
 })
 
+router.get('/notification', verifyLogin, async (req, res) => {
+  let user = req.session.user
+  let item = await postHelper.getUserItem(req.session.user)
+  // console.log(item);
+  if (item != null) {
+    res.render('user/notification', { item, user })
+  } else {
+    res.redirect('/')
+  }
+})
+
 module.exports = router;

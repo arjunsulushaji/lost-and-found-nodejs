@@ -4,7 +4,7 @@ const { response } = require('express');
 var ObjectId = require('mongodb').ObjectId
 
 module.exports = {
-    
+
     addFoundThings: (item, user) => {
         return new Promise((resolve, reject) => {
             const d = new Date();
@@ -79,6 +79,18 @@ module.exports = {
             }).then(() => {
                 resolve(response)
             })
+        })
+    },
+
+    getUserItem: (details) => {
+        let cardNumbers = [
+            aadharno = details.aadharNo,
+            panno = details.panNo,
+            driving = details.drivingLicenseNo
+        ]
+        return new Promise(async (resolve, reject) => {
+            let items = await db.get().collection(collection.FOUND_THINGS).find({ cardNo: { $in: cardNumbers } }).toArray()
+            resolve(items)
         })
     }
 }
