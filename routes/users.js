@@ -16,8 +16,13 @@ const verifyLogin = (req, res, next) => {
 /* GET home page. */
 router.get('/', async function (req, res, next) {                        //get home page
   let user = req.session.user
+  let size = null
+  if(user){
+    let item = await postHelper.getUserItem(user)
+    size = item.length
+  }
   await postHelper.getFoundThings().then((foundThings) => {
-    res.render('user/index', { foundThings, user });
+    res.render('user/index', { foundThings, user,size });
   })
   // req.session.userSuccess = null
 });
