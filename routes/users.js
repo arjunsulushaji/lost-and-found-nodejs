@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var userHelper = require('../helpers/user-helpers')
-var postHelper = require('../helpers/post-helpers')
+var postHelper = require('../helpers/post-helpers');
+const { response } = require('express');
 
 
 const verifyLogin = (req, res, next) => {
@@ -131,11 +132,25 @@ router.get('/notification', verifyLogin, async (req, res) => {
   let user = req.session.user
   let item = await postHelper.getUserItem(req.session.user)
   // console.log(item);
-  if (item != null) {
+  if (item.length > 0) {
     res.render('user/notification', { item, user })
   } else {
     res.redirect('/')
   }
+})
+
+router.get('/edit-profile',async(req,res)=>{
+  let user = req.session.user
+  let userData = await userHelper.getUserData(user)
+  // console.log(userData);
+  res.render('user/edit-profile',{user,userData})
+})
+
+router.post('/edit-profile',verifyLogin,(req,res)=>{
+  // console.log(req.body);
+  userHelper.editUserProfile(req.body).then(()=>{
+    res.json({ success : true })
+  })
 })
 
 module.exports = router;
