@@ -16,7 +16,7 @@ const verifyLogin = (req, res, next) => {
 /* GET home page. */
 router.get('/', async function (req, res, next) {                        //get home page
   let user = req.session.user
-  let size = null
+  let size = 0
   if(user){
     let item = await postHelper.getUserItem(user)
     size = item.length
@@ -33,7 +33,7 @@ router.get('/signup', (req, res) => {                             //get user sig
 })
 
 router.post('/signup', async (req, res) => {                      //store signup data
-  // console.log(req.body);
+  console.log(req.body);
   let alert = true
   let user = await userHelper.getUser(req.body)
   if (user.length > 0) {
@@ -83,9 +83,14 @@ router.get('/logout', (req, res) => {                               //get user l
 })
 
 
-router.get('/add-found-things', verifyLogin, (req, res) => {              //get form for found things
+router.get('/add-found-things', verifyLogin, async(req, res) => {              //get form for found things
   let user = req.session.user
-  res.render('user/add-found-things', { user })
+  let size = null
+  if(user){
+    let item = await postHelper.getUserItem(user)
+    size = item.length
+  }
+  res.render('user/add-found-things', { user ,size})
 })
 
 router.post('/add-found-things', verifyLogin, (req, res) => {            //add post for found things
@@ -105,8 +110,13 @@ router.get('/found-things-post', verifyLogin, async (req, res) => {         //ge
   let foundThings = await postHelper.getFoundThing(req.session.user)
   let user = req.session.user
   // console.log(lostThings);
+  let size = null
+  if(user){
+    let item = await postHelper.getUserItem(user)
+    size = item.length
+  }
   if (foundThings.length > 0) {
-    res.render('user/show-posts2', { foundThings, user })
+    res.render('user/show-posts2', { foundThings, user,size })
   } else {
     res.redirect('/')
   }
@@ -133,7 +143,7 @@ router.post('/edit-found-post', (req, res) => {                                 
   })
 })
 
-router.get('/notification', verifyLogin, async (req, res) => {
+router.get('/notification', verifyLogin, async (req, res) => {                        //get notification
   let user = req.session.user
   let item = await postHelper.getUserItem(req.session.user)
   // console.log(item);
@@ -144,14 +154,19 @@ router.get('/notification', verifyLogin, async (req, res) => {
   }
 })
 
-router.get('/edit-profile',async(req,res)=>{
+router.get('/edit-profile',async(req,res)=>{                                            //edit profile of user
   let user = req.session.user
+  let size = null
+  if(user){
+    let item = await postHelper.getUserItem(user)
+    size = item.length
+  }
   let userData = await userHelper.getUserData(user)
   // console.log(userData);
-  res.render('user/edit-profile',{user,userData})
+  res.render('user/edit-profile',{user,userData,size})
 })
 
-router.post('/edit-profile',verifyLogin,(req,res)=>{
+router.post('/edit-profile',verifyLogin,(req,res)=>{                                       //submit edited profile
   // console.log(req.body);
   userHelper.editUserProfile(req.body).then(()=>{
     res.json({ success : true })

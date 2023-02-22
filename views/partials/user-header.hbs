@@ -13,6 +13,7 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    {{#if user}}
                     <li class="nav-item active">
                         <a class="nav-link mr-2" href="/notification">Notification <span
                                 class="sr-only">(current)</span><span class="badge badge-light">{{size}}</span></a>
@@ -33,6 +34,7 @@
                             <a href="/found-things-post" class="dropdown-item" type="button">found-things-post</a>
                         </div>
                     </div>
+                    {{/if}}
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search">

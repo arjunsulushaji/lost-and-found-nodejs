@@ -1,0 +1,59 @@
+<section>
+    <div class="">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            {{!-- <a class="navbar-brand mb-0 h1" href="#">Navbar</a> --}}
+            <a class="navbar-brand mr-5" href="/">
+                <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top mr-2" alt="">
+                Admin Panel
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    {{#if user}}
+                    <li class="nav-item active">
+                        <a class="nav-link mr-2" href="/notification">Notification <span
+                                class="sr-only">(current)</span><span class="badge badge-light">{{size}}</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link mr-2" href="/add-found-things">Add found things <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <div class="btn-group dropright">
+                        <button type="button" class="btn btn-primary">
+                            Posts
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Posts</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="/found-things-post" class="dropdown-item" type="button">found-things-post</a>
+                        </div>
+                    </div>
+                    {{/if}}
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0 mr-5" type="submit">Search</button>
+                </form>
+                <div class="dropdown mr-4">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        {{#if adminloggedIn}}
+                        <a href="" class="dropdown-item" type="button">Logout</a>
+                        {{else}}
+                        <a href="/admin/signup" class="dropdown-item" type="button">Signup</a>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</section>
