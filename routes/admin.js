@@ -6,7 +6,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.render('admin/login', { admin: true });
+  res.render('admin/login', { admin: true});
 });
 
 router.get('/signup', (req, res) => {
@@ -32,10 +32,21 @@ router.post('/login', async (req, res) => {
       req.session.admin = response.admin
       let adminloggedIn = req.session.admin
       res.render('admin/index', { admin: true, adminloggedIn })
+    } else if (response.emailStatus === true) {
+      req.session.adminLoginEmailErr = 'Invalid email address !!'
+      res.render('admin/login',{'EmailErr': req.session.adminLoginEmailErr})
+      req.session.adminLoginEmailErr = null
     } else {
-      res.redirect('/admin')
+      req.session.adminLoginPassErr = 'Incorrect Password !!'
+      res.render('admin/login',{'PasswordErr': req.session.adminLoginPassErr })
+      req.session.adminLoginPassErr = null
     }
   })
+})
+
+router.get('/logout', (req, res) => {                               //get user logout 
+  req.session.destroy()
+  res.redirect('/admin')
 })
 
 module.exports = router;

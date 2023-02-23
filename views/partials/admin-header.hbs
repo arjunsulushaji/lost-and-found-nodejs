@@ -2,7 +2,7 @@
     <div class="">
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             {{!-- <a class="navbar-brand mb-0 h1" href="#">Navbar</a> --}}
-            <a class="navbar-brand mr-5" href="/">
+            <a class="navbar-brand mr-5" href="/admin">
                 <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top mr-2" alt="">
                 Admin Panel
             </a>
@@ -13,27 +13,15 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    {{#if user}}
+                    {{#if adminloggedIn}}
                     <li class="nav-item active">
-                        <a class="nav-link mr-2" href="/notification">Notification <span
-                                class="sr-only">(current)</span><span class="badge badge-light">{{size}}</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link mr-2" href="/add-found-things">Add found things <span
+                        <a class="nav-link mr-2" href="/add-found-things">All Users <span
                                 class="sr-only">(current)</span></a>
                     </li>
-                    <div class="btn-group dropright">
-                        <button type="button" class="btn btn-primary">
-                            Posts
-                        </button>
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="sr-only">Posts</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a href="/found-things-post" class="dropdown-item" type="button">found-things-post</a>
-                        </div>
-                    </div>
+                    <li class="nav-item active">
+                        <a class="nav-link mr-2" href="/add-found-things">All Posts <span
+                                class="sr-only">(current)</span></a>
+                    </li>
                     {{/if}}
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -43,11 +31,15 @@
                 <div class="dropdown mr-4">
                     <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{#if adminloggedIn}}
+                        {{adminloggedIn.adminName}}
+                        {{else}}
                         Account
+                        {{/if}}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         {{#if adminloggedIn}}
-                        <a href="" class="dropdown-item" type="button">Logout</a>
+                        <a href="/admin/logout" class="dropdown-item" type="button">Logout</a>
                         {{else}}
                         <a href="/admin/signup" class="dropdown-item" type="button">Signup</a>
                         {{/if}}
