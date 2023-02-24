@@ -5,7 +5,7 @@ const { use } = require('../routes/admin')
 const { response } = require('express')
 var ObjectId = require('mongodb').ObjectId
 
-module.exports={
+module.exports = {
     doAdminSignup: (adminData) => {
         return new Promise(async (resolve, reject) => {
             let respone = {}
@@ -23,7 +23,7 @@ module.exports={
     doAdminLogin: (adminData) => {
         return new Promise(async (resolve, reject) => {
             let respone = {}
-            let admin = await db.get().collection(collection.ADMIN_COLLECTION).findOne({ adminEmail: adminData.adminEmail})
+            let admin = await db.get().collection(collection.ADMIN_COLLECTION).findOne({ adminEmail: adminData.adminEmail })
             if (admin) {
                 bcrypt.compare(adminData.adminPass, admin.adminPass).then((status) => {
                     if (status) {
@@ -40,6 +40,20 @@ module.exports={
                 console.log('admin email dosent match');
                 resolve({ emailStatus: true })
             }
+        })
+    },
+
+    getUserAll: () => {
+        return new Promise(async (resolve, reject) => {
+            let user = await db.get().collection(collection.USER_COLLECTION).find().toArray()
+            resolve(user)
+        })
+    },
+
+    getPostAll: () => {
+        return new Promise(async (resolve, reject) => {
+            let post = await db.get().collection(collection.FOUND_THINGS).find().toArray()
+            resolve(post)
         })
     }
 }

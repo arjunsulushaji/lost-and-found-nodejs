@@ -1,12 +1,15 @@
-var adminHelper = require('../helpers/admin-helpers')
-var postHelper = require('../helpers/post-helpers');
+
 var express = require('express');
 var router = express.Router();
+var userHelper = require('../helpers/user-helpers')
+var postHelper = require('../helpers/post-helpers');
+var adminHelper = require('../helpers/admin-helpers')
+const { response } = require('express');
 
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.render('admin/login', { admin: true});
+router.get('/', async function(req, res, next) {
+    res.render('admin/login', { admin: true});
 });
 
 router.get('/signup', (req, res) => {
@@ -25,13 +28,15 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   // console.log(req.body);
+  let user = await adminHelper.getUserAll()
+  let post = await adminHelper.getPostAll()
   await adminHelper.doAdminLogin(req.body).then((response) => {
     if (response.status) {
       req.session.adminLogin = true
       req.session.adminSuccess = true
       req.session.admin = response.admin
       let adminloggedIn = req.session.admin
-      res.render('admin/index', { admin: true, adminloggedIn })
+      res.render('admin/index', { admin: true, adminloggedIn,user,post })
     } else if (response.emailStatus === true) {
       req.session.adminLoginEmailErr = 'Invalid email address !!'
       res.render('admin/login',{'EmailErr': req.session.adminLoginEmailErr})

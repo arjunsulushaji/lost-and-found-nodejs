@@ -3,6 +3,7 @@ var collection = require('../config/collection')
 const bcrypt = require('bcrypt')
 const { use } = require('../routes/admin')
 const { response } = require('express')
+const { Collection } = require('mongoose')
 var ObjectId = require('mongodb').ObjectId
 
 module.exports = {
@@ -28,7 +29,7 @@ module.exports = {
     doLogin: (userData) => {
         return new Promise(async (resolve, reject) => {
             let respone = {}
-            let user = await db.get().collection(collection.USER_COLLECTION).findOne({ userEmail: userData.email})
+            let user = await db.get().collection(collection.USER_COLLECTION).findOne({ userEmail: userData.email })
             if (user) {
                 bcrypt.compare(userData.password, user.userPass).then((status) => {
                     if (status) {
@@ -78,4 +79,5 @@ module.exports = {
             })
         })
     }
+    
 }

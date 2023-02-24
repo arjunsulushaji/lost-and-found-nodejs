@@ -1,19 +1,69 @@
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-
-<h1>sdgsdfggsdfgsg</h1>
-
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
-<h1>sdgsdfggsdfgsg</h1>
+<section class="pt-5">
+    <div class="pt-5">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#user" tabindex="-1">All Users</a>
+                    {{!--
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li> --}}
+                <li class="page-item">
+                    <a class="page-link" href="#posts">All Posts</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <h2 class="text-center">ALL USER</h2>
+        <table class="table" id="user">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">NAME</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">DISTRICT</th>
+                    <th scope="col">PHONE NO</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each user}}
+                <tr>
+                    <th scope="row">{{this.userName}}</th>
+                    <td>{{this.userEmail}}</td>
+                    <td>{{this.userDistrict}}</td>
+                    <td>{{this.userPhno}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+         <h2 class="text-center">ALL POSTS</h2>
+        <table class="table" id="posts">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">HOLDER NAME</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">CARD NO</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">TIME</th>
+                    <th scope="col">POSTED BY</th>
+                    <th scope="col">DESCRIPTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each post}}
+                <tr>
+                    <th scope="row">{{this.holderName}}</th>
+                    <td>{{this.category}}</td>
+                    <td>{{this.cardNo}}</td>
+                    <td>{{this.date}}</td>
+                    <td>{{this.time}}</td>
+                    <td>{{this.user.name}}</td>
+                    <td>{{this.description}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
