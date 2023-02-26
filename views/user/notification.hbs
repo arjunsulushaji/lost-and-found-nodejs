@@ -2,7 +2,7 @@
     <div class="container pt-5">
         {{#each item}}
         <div class="mt-5 alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Hello {{../user.userName}}</strong> You {{this.category}} found successfully...!
+            <strong>Hello {{../user.userName}}</strong> your <b>{{this.category}}</b> found successfully...!
             <button type="button" data-toggle="modal" class="btn btn-primary btn-sm ml-5"
                 data-target="#{{this._id}}">Check Details</button>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -14,18 +14,18 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
+                        <h5 class="modal-title text-primary" id="exampleModalLongTitle">Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h5>Description</h5>
-                        <p>{{this.description}}</p>
+                        <h5 class="text-primary">Description</h5>
+                        <h6>{{this.description}}</h6>
                         <hr>
-                        <h5>Conatct</h5>
-                        <p> Name : {{this.user.name}}</p>
-                        <p> Mobile : {{this.user.phno}}</p>
+                        <h5 class="text-primary">Conatct</h5>
+                        <h6> Name : {{this.user.name}}</h6>
+                        <h6> Mobile : {{this.user.phno}}</h6>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
