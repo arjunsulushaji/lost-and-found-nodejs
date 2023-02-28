@@ -78,6 +78,15 @@ module.exports = {
                 resolve(response)
             })
         })
+    },
+
+    getSearch: (data) => {
+        return new Promise(async (resolve, reject) => {
+            // console.log(data);
+            let result = await db.get().collection(collection.FOUND_THINGS).find({cardNo:data.value}).toArray()
+            // console.log(result);
+            resolve(result)
+        })
     }
-    
+
 }

@@ -3,6 +3,7 @@ var router = express.Router();
 var userHelper = require('../helpers/user-helpers')
 var postHelper = require('../helpers/post-helpers');
 const { response } = require('express');
+const notifier = require('node-notifier');
 
 
 const verifyLogin = (req, res, next) => {
@@ -17,12 +18,12 @@ const verifyLogin = (req, res, next) => {
 router.get('/', async function (req, res, next) {                        //get home page
   let user = req.session.user
   let size = 0
-  if(user){
+  if (user) {
     let item = await postHelper.getUserItem(user)
     size = item.length
   }
   await postHelper.getFoundThings().then((foundThings) => {
-    res.render('user/index', { foundThings, user,size });
+    res.render('user/index', { foundThings, user, size });
   })
   // req.session.userSuccess = null
 });
@@ -83,14 +84,14 @@ router.get('/logout', (req, res) => {                               //get user l
 })
 
 
-router.get('/add-found-things', verifyLogin, async(req, res) => {              //get form for found things
+router.get('/add-found-things', verifyLogin, async (req, res) => {              //get form for found things
   let user = req.session.user
   let size = null
-  if(user){
+  if (user) {
     let item = await postHelper.getUserItem(user)
     size = item.length
   }
-  res.render('user/add-found-things', { user ,size})
+  res.render('user/add-found-things', { user, size })
 })
 
 router.post('/add-found-things', verifyLogin, (req, res) => {            //add post for found things
@@ -111,12 +112,12 @@ router.get('/found-things-post', verifyLogin, async (req, res) => {         //ge
   let user = req.session.user
   // console.log(lostThings);
   let size = null
-  if(user){
+  if (user) {
     let item = await postHelper.getUserItem(user)
     size = item.length
   }
   if (foundThings.length > 0) {
-    res.render('user/show-posts2', { foundThings, user,size })
+    res.render('user/show-posts2', { foundThings, user, size })
   } else {
     res.redirect('/')
   }
@@ -154,23 +155,40 @@ router.get('/notification', verifyLogin, async (req, res) => {                  
   }
 })
 
-router.get('/edit-profile',async(req,res)=>{                                            //edit profile of user
+router.get('/edit-profile', async (req, res) => {                                            //edit profile of user
   let user = req.session.user
   let size = null
-  if(user){
+  if (user) {
     let item = await postHelper.getUserItem(user)
     size = item.length
   }
   let userData = await userHelper.getUserData(user)
   // console.log(userData);
-  res.render('user/edit-profile',{user,userData,size})
+  res.render('user/edit-profile', { user, userData, size })
 })
 
-router.post('/edit-profile',verifyLogin,(req,res)=>{                                       //submit edited profile
+router.post('/edit-profile', verifyLogin, (req, res) => {                                       //submit edited profile
   // console.log(req.body);
-  userHelper.editUserProfile(req.body).then(()=>{
-    res.json({ success : true })
+  userHelper.editUserProfile(req.body).then(() => {
+    res.json({ success: true })
   })
+})
+
+router.post('/search', async (req, res) => {
+  // console.log(req.body);
+  let user = req.session.user
+  let search = await userHelper.getSearch(req.body)
+  // console.log(search);
+  let length = search.length;
+  if (length > 0) {
+    res.render('user/search', { search, user })
+  } else {
+    res.redirect('/')
+    notifier.notify({
+      title: 'ALERT',
+      message: 'Sorry no item found !',
+    });
+  }
 })
 
 module.exports = router;
