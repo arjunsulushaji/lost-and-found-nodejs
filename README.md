@@ -8,21 +8,14 @@ Farmer can login and add vegetable in their shops.
 Users can login and purchase the vegetable.
 
 
-user - module
-user can login
-user can signup
-add to cart vegetable form different shop
-direcly buy vegetable without add to cart
+user - module ----
+user can login, user can signup, add to cart vegetable form different shop, direcly buy vegetable without add to cart,
 
-farmer - module
-farmer can login
-add or remove vegitable in shop
-update status of booked vegetables
+farmer - module ----
+farmer can login, add or remove vegitable in shop, update status of booked vegetables,
 
-admin - module
-admin can login
-add or remove farmer
-site maintenece
+admin - module ----
+admin can login, add or remove farmer, site maintenece,
 
 
 language - JSP(java server pages) database - MySQL
